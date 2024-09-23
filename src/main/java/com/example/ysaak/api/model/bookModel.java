@@ -3,12 +3,34 @@ package com.example.ysaak.api.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.annotation.processing.Generated;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "BOOKS")
 public class BookModel implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "BOK_AUTOR", length = 150, nullable = false)
     private String autor;
+
+    @Column(name = "BOK_DATE", length = 10, nullable = false)
     private Date launch_date;
-    private Double price;
+
+    @Column(name = "BOK_PRICE", length = 10, nullable = false)
+    private double price;
+
+    @Column(name = "BOK_LONGTEXT", length = 250, nullable = false)
     private String longText;
 
     public BookModel() {
@@ -69,7 +91,9 @@ public class BookModel implements Serializable {
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((autor == null) ? 0 : autor.hashCode());
         result = prime * result + ((launch_date == null) ? 0 : launch_date.hashCode());
-        result = prime * result + ((price == null) ? 0 : price.hashCode());
+        long temp;
+        temp = Double.doubleToLongBits(price);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
         result = prime * result + ((longText == null) ? 0 : longText.hashCode());
         return result;
     }
@@ -98,10 +122,7 @@ public class BookModel implements Serializable {
                 return false;
         } else if (!launch_date.equals(other.launch_date))
             return false;
-        if (price == null) {
-            if (other.price != null)
-                return false;
-        } else if (!price.equals(other.price))
+        if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
             return false;
         if (longText == null) {
             if (other.longText != null)
