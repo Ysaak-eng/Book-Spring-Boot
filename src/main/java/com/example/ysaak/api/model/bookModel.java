@@ -3,7 +3,7 @@ package com.example.ysaak.api.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class bookModel implements Serializable {
+public class BookModel implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
     private String autor;
@@ -11,10 +11,10 @@ public class bookModel implements Serializable {
     private Double price;
     private String longText;
 
-    public bookModel() {
+    public BookModel() {
     }
 
-    public bookModel(Long id, String autor, Date launch_date, Double price, String longText) {
+    public BookModel(Long id, String autor, Date launch_date, Double price, String longText) {
         this.id = id;
         this.autor = autor;
         this.launch_date = launch_date;
@@ -82,7 +82,7 @@ public class bookModel implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        bookModel other = (bookModel) obj;
+        BookModel other = (BookModel) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
